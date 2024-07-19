@@ -58,4 +58,9 @@ public class User {
 
     @OneToMany(mappedBy = "user")
     private List<Review> reviews;
+
+    @Transient
+    public String getFullName() {
+        return name + " " + surname + " " + patronymic;
+    }
 }

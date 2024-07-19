@@ -1,10 +1,12 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
-<head>
-    <meta charset="UTF-8">
-    <title>Товар</title>
-</head>
+
+<div th:insert="blocks/header :: header"></div>
+
 <body>
+
+<div th:insert="blocks/navbar :: navbar"></div>
+
 <div>
     <p th:text="${product.getTitle()}">Value</p>
     <p th:text="${product.getPrice()}">Value</p>

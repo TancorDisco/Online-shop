@@ -3,10 +3,7 @@ package ru.online_shop.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import ru.online_shop.repositories.ProductRepository;
+import org.springframework.web.bind.annotation.*;
 import ru.online_shop.services.ProductService;
 
 @Controller
@@ -21,8 +18,8 @@ public class ProductController {
     }
 
     @GetMapping
-    public String index(Model model) {
-        model.addAttribute("products", productService.findAll());
+    public String index(Model model, @RequestParam(name = "searchRequest", required = false) String request) {
+        model.addAttribute("products", productService.findProducts(request));
         return "/products/index";
     }
 

@@ -24,4 +24,16 @@ public class ProductService {
     public Product findById(Long id) {
         return productRepository.findById(id);
     }
+
+    public List<Product> findByTitleStartingWith(String request) {
+        return productRepository.findByTitleStartingWith(request);
+    }
+
+    public List<Product> findProducts(String request) {
+        if (request == null) {
+            return productRepository.findAll();
+        } else {
+            return productRepository.findByTitleStartingWith(request);
+        }
+    }
 }
