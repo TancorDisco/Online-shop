@@ -31,7 +31,7 @@ public class Review {
     @Max(10)
     private Integer grade;
 
-    @ManyToOne
-    @JoinColumn(name = "user", referencedColumnName = "id")
-    private User user;
+    /*@ManyToOne
+    @JoinColumn(name = "user_entity", referencedColumnName = "id")
+    private UserEntity userEntity;*/
 }

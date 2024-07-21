@@ -10,22 +10,19 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
-import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import ru.online_shop.security.UserDetails;
-import ru.online_shop.services.UserDetailsService;
+import ru.online_shop.services.PersonDetailsService;
 
 @Configuration
 @EnableWebSecurity
 @EnableMethodSecurity
 public class SecurityConfig {
     private final PasswordEncoder passwordEncoder;
-    private final UserDetailsService userDetails;
+    private final PersonDetailsService userDetails;
 
     @Autowired
-    public SecurityConfig(PasswordEncoder passwordEncoder, UserDetailsService userDetails) {
+    public SecurityConfig(PasswordEncoder passwordEncoder, PersonDetailsService userDetails) {
         this.passwordEncoder = passwordEncoder;
         this.userDetails = userDetails;
     }
@@ -33,8 +30,14 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
         http
+                .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(requests -> requests
                         .anyRequest().permitAll()
+                )
+                .formLogin(form -> form
+                        .loginPage("/auth/login").loginProcessingUrl("/process_login")
+                        .defaultSuccessUrl("/products", true)
+                        .failureUrl("/auth/login?error")
                 );
 
         return http.build();

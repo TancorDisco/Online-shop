@@ -3,26 +3,32 @@ package ru.online_shop.models;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.sql.Date;
-import java.util.List;
 
 @Entity
-@Table(name = "User")
+@Table(name = "person")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class User {
+public class Person {
 
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(name = "username")
+    @NotEmpty(message = "Незаполненное поле!")
+    private String username;
+
+    @Column(name = "password")
+    @NotEmpty(message = "Незаполненное поле!")
+    private String password;
 
     @Column(name = "name")
     @NotEmpty(message = "Незаполненное поле!")
@@ -48,16 +54,16 @@ public class User {
 
     @Column(name = "address")
     @NotEmpty(message = "Незаполненное поле!")
-    @Pattern(regexp = "[A-Z]\\w+, [A-Z]\\w+, \\d{6}", message = "Ваш адрес должен быть в формате: " +
-            "страна, город, индекс(6 цифр) Пример: Россия, Москва, 123456")
+    /*@Pattern(regexp = "[A-Z]\\w+, [A-Z]\\w+, \\d{6}", message = "Ваш адрес должен быть в формате: " +
+            "страна, город, индекс(6 цифр) Пример: Россия, Москва, 123456")*/
     private String address;
 
     @Column(name = "role")
     @NotEmpty
     private String role;
 
-    @OneToMany(mappedBy = "user")
-    private List<Review> reviews;
+    /*@OneToMany(mappedBy = "user_entity")
+    private List<Review> reviews;*/
 
     @Transient
     public String getFullName() {

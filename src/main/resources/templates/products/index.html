@@ -1,11 +1,11 @@
 <!doctype html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 
-<div th:insert="blocks/header :: header"></div>
+<div th:insert="~{blocks/header}"></div>
 
 <body>
 
-<div th:insert="blocks/navbar :: navbar"></div>
+<div th:insert="~{blocks/navbar}"></div>
 
 <div> Все товары: </div>
 <div th:each="product : ${products}">

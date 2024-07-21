@@ -1,11 +1,6 @@
 <div th:fragment="navbar" xmlns:th="http://www.w3.org/1999/xhtml">
     <nav class="navbar navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
         <div class="container-fluid">
-            <!--<a class="navbar-brand" href="#">Navbar scroll</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll"
-                    aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>-->
             <a class="navbar-brand" href="/products">
                 ONLINE-SHOP
             </a>
@@ -38,6 +33,9 @@
                     <input class="form-control me-2" type="text" id="searchRequest" name="searchRequest">
                     <button class="btn btn-outline-success" type="submit">Поиск</button>
                 </form>
+                <a class="navbar-brand" href="/auth/login">
+                    <img src="/images/user.png" alt="Bootstrap" width="30" height="24">
+                </a>
             </div>
         </div>
     </nav>
