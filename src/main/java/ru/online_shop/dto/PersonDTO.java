@@ -1,72 +1,42 @@
-package ru.online_shop.models;
+package ru.online_shop.dto;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
-@Entity
-@Table(name = "person")
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
-public class Person {
+public class PersonDTO {
 
-    @Id
-    @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
-    @Column(name = "username")
     @NotEmpty(message = "Незаполненное поле!")
     private String username;
 
-    @Column(name = "password")
     @NotEmpty(message = "Незаполненное поле!")
     private String password;
 
-    @Column(name = "name")
     @NotEmpty(message = "Незаполненное поле!")
     private String name;
 
-    @Column(name = "surname")
     @NotEmpty(message = "Незаполненное поле!")
     private String surname;
 
-    @Column(name = "patronymic")
     @NotEmpty(message = "Незаполненное поле!")
     private String patronymic;
 
-    @Column(name = "birth_day")
     @Temporal(TemporalType.DATE)
     @DateTimeFormat(pattern = "dd/MM/yyyy")
     private Date birthDay;
 
-    @Column(name = "email")
     @Email
     @NotEmpty(message = "Незаполненное поле!")
     private String email;
 
-    @Column(name = "address")
     @NotEmpty(message = "Незаполненное поле!")
     /*@Pattern(regexp = "[A-Z]\\w+, [A-Z]\\w+, \\d{6}", message = "Ваш адрес должен быть в формате: " +
             "страна, город, индекс(6 цифр) Пример: Россия, Москва, 123456")*/
     private String address;
-
-    @Column(name = "role")
-    @NotEmpty
-    private String role;
-
-    /*@OneToMany(mappedBy = "user_entity")
-    private List<Review> reviews;*/
-
-    @Transient
-    public String getFullName() {
-        return name + " " + surname + " " + patronymic;
-    }
 }
