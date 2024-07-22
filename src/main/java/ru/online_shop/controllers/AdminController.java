@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -53,8 +54,13 @@ public class AdminController {
         return "redirect:/products";
     }
 
+    @GetMapping("select-product")
+    public String selectProductToBeUpdated(Model model) {
+        model.addAttribute("products", productService.findAll());
+        return "admin/select-product";
+    }
+
     public Product convertToPerson(ProductDTO productDTO) {
         return modelMapper.map(productDTO, Product.class);
     }
-
 }

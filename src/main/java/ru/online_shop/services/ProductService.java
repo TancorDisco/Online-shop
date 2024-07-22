@@ -40,4 +40,9 @@ public class ProductService {
     public void createProduct(Product product) {
         productRepository.save(product);
     }
+
+    public void update(Product product, Long id) {
+        product.setId(id);
+        productRepository.save(product);
+    }
 }

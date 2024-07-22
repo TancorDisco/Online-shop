@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
 
 <div th:insert="~{blocks/header}"></div>
 
@@ -10,6 +10,13 @@
 <div>
     <p th:text="${product.getTitle()}">Value</p>
     <p th:text="${product.getPrice()}">Value</p>
+    <div sec:authorize="hasRole('ROLE_ADMIN')">
+        <ul>
+            <li><a class="btn btn-warning" th:href="@{/products/{id}/update(id=${product.getId()})}"
+                   role="button">Обновить товар</a></li>
+            <li><a class="btn btn-danger" href="#" role="button">Удалить товар</a></li>
+        </ul>
+    </div>
 </div>
 
 </body>
