@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<div th:insert="~{blocks/header}"></div>
+
+<body>
+    <div>
+        <p th:text="${person.getUsername()}">value</p>
+        <p th:text="${person.getPassword()}">value</p>
+        <p th:text="${person.getName()}">value</p>
+        <p th:text="${person.getSurname()}">value</p>
+        <p th:text="${person.getPatronymic()}">value</p>
+        <p th:text="${person.getBirthDay()}">value</p>
+        <p th:text="${person.getEmail()}">value</p>
+        <p th:text="${person.getAddress()}">value</p>
+    </div>
+    <br>
+    <a class="btn btn-warning" href="user/change" role="button">Изменить профиль</a>
+</body>
+</html>

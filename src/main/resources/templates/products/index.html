@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
 
 <div th:insert="~{blocks/header}"></div>
 
@@ -11,6 +11,11 @@
 <div th:each="product : ${products}">
     <a th:href="@{products/{id}(id=${product.getId()})}" th:text="${product.getTitle() + ', ' + product.getPrice()}"></a>
 </div>
+
+<div sec:authorize="isAuthenticated()">
+    Пользователь вошёл в аккаунт
+</div>
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>

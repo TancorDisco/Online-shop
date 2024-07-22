@@ -1,4 +1,4 @@
-<div th:fragment="navbar" xmlns:th="http://www.w3.org/1999/xhtml">
+<div th:fragment="navbar" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
     <nav class="navbar navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
         <div class="container-fluid">
             <a class="navbar-brand" href="/products">
@@ -33,9 +33,29 @@
                     <input class="form-control me-2" type="text" id="searchRequest" name="searchRequest">
                     <button class="btn btn-outline-success" type="submit">Поиск</button>
                 </form>
-                <a class="navbar-brand" href="/auth/login">
-                    <img src="/images/user.png" alt="Bootstrap" width="30" height="24">
-                </a>
+                <div sec:authorize="!isAuthenticated()">
+                    <a class="navbar-brand" href="/auth/login">
+                        <img src="/images/user.png" alt="Bootstrap" width="30" height="30">
+                    </a>
+                </div>
+                <div sec:authorize="isAuthenticated()">
+                    <div class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                           aria-expanded="false">
+                            <img src="/images/user.png" alt="Bootstrap" width="30" height="30">
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-lg-end">
+                            <li><a class="dropdown-item" href="/user">Аккаунт</a></li>
+                            <div sec:authorize="hasRole('ROLE_ADMIN')">
+                                <li><a class="dropdown-item" href="/admin">Управление</a></li>
+                            </div>
+                            <li><a class="dropdown-item" href="#">Настройки</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" th:href="@{/logout}" th:action="@{/logout}"
+                                   th:method="POST">Выйти</a></li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </div>
     </nav>

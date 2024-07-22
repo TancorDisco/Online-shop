@@ -32,12 +32,17 @@ public class SecurityConfig {
         http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(requests -> requests
+                        .requestMatchers("/admin").hasRole("ADMIN")
                         .anyRequest().permitAll()
                 )
                 .formLogin(form -> form
                         .loginPage("/auth/login").loginProcessingUrl("/process_login")
                         .defaultSuccessUrl("/products", true)
                         .failureUrl("/auth/login?error")
+                )
+                .logout(out -> out
+                        .logoutUrl("/logout")
+                        .logoutSuccessUrl("/products")
                 );
 
         return http.build();
