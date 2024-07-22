@@ -36,4 +36,8 @@ public class ProductService {
             return productRepository.findByTitleStartingWith(request);
         }
     }
+
+    public void createProduct(Product product) {
+        productRepository.save(product);
+    }
 }
