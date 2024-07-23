@@ -4,6 +4,7 @@
 <div th:insert="~{blocks/header}"></div>
 
 <body>
+<div th:insert="~{blocks/navbar}"></div>
 <form th:method="PATCH" th:action="@{/products/{id}/update(id=${product.getId()})}" th:object="${product}">
     <label for="title">Введите название: (обязательно)</label>
     <input type="text" th:field="*{title}" id="title">

@@ -14,7 +14,11 @@
         <ul>
             <li><a class="btn btn-warning" th:href="@{/products/{id}/update(id=${product.getId()})}"
                    role="button">Обновить товар</a></li>
-            <li><a class="btn btn-danger" href="#" role="button">Удалить товар</a></li>
+            <li>
+                <form th:method="DELETE" th:action="@{/products/{id}(id=${product.getId()})}">
+                    <button type="submit" class="btn btn-danger" role="button">Удалить товар</button>
+                </form>
+            </li>
         </ul>
     </div>
 </div>

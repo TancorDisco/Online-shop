@@ -43,7 +43,7 @@ public class ProductController {
     }
 
     @PatchMapping("/{id}/update")
-    public String update (@ModelAttribute("product") @Valid ProductDTO productDTO,
+    public String update(@ModelAttribute("product") @Valid ProductDTO productDTO,
                           BindingResult bindingResult, @PathVariable("id") Long id) {
         Product product = convertToProduct(productDTO);
 
@@ -54,6 +54,13 @@ public class ProductController {
         productService.update(product, id);
         return "redirect:/products/{id}";
     }
+
+    @DeleteMapping("/{id}")
+    public String delete(@PathVariable Long id) {
+        productService.delete(id);
+        return "redirect:/products";
+    }
+
 
     public Product convertToProduct(ProductDTO productDTO) {
         return modelMapper.map(productDTO, Product.class);

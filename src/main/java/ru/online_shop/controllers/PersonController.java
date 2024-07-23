@@ -34,14 +34,13 @@ public class PersonController {
 
     @GetMapping
     public String accountPage(Model model) {
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        String username = auth.getName();
-        model.addAttribute("person", personService.findByUsername(username).get());
+        model.addAttribute("person", getAuthUser());
         return "user/account";
     }
 
     @GetMapping("/change")
-    public String changeProfile(@ModelAttribute("person") PersonDTO personDTO) {
+    public String changeProfile(Model model) {
+        model.addAttribute("person", getAuthUser());
         return "user/change-info";
     }
 
@@ -52,19 +51,23 @@ public class PersonController {
         if (bindingResult.hasErrors()) {
             return "user/change";
         }
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        Optional<Person> personToBeUpdated = personService.findByUsername(auth.getName());
-        if (personToBeUpdated.isPresent()) {
-            Person person = convertToPerson(personDTO);
-            personService.update(personToBeUpdated.get(), person);
-        } else {
-            throw new UsernameNotFoundException("Ошибка!");
-        }
+        Person person = convertToPerson(personDTO);
+        personService.update(getAuthUser(), person);
         return "redirect:/user";
     }
 
 
     public Person convertToPerson(PersonDTO personDTO) {
         return modelMapper.map(personDTO, Person.class);
+    }
+
+    public Person getAuthUser() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        Optional<Person> person = personService.findByUsername(auth.getName());
+        if (person.isPresent()) {
+            return person.get();
+        } else {
+            throw new UsernameNotFoundException("Ошибка");
+        }
     }
 }

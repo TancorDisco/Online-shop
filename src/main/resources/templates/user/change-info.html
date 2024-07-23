@@ -4,6 +4,7 @@
 <div th:insert="~{blocks/header}"></div>
 
 <body>
+<div th:insert="~{blocks/navbar}"></div>
 <form th:method="PATCH" th:action="@{/user/change}" th:object="${person}">
     <label for="username">Введите логин: </label>
     <input type="text" th:field="*{username}" id="username">

@@ -2,6 +2,7 @@ package ru.online_shop.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import ru.online_shop.models.Product;
 import ru.online_shop.repositories.ProductRepository;
 
@@ -37,12 +38,19 @@ public class ProductService {
         }
     }
 
+    @Transactional
     public void createProduct(Product product) {
         productRepository.save(product);
     }
 
+    @Transactional
     public void update(Product product, Long id) {
         product.setId(id);
         productRepository.save(product);
+    }
+
+    @Transactional
+    public void delete(Long id) {
+        productRepository.deleteById(id);
     }
 }
