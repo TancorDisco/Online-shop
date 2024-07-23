@@ -6,7 +6,7 @@
 <body>
 <div th:insert="~{blocks/navbar}"></div>
 
-    <form th:method="POST" th:action="@{/admin/create-product}" th:object="${product}">
+    <form th:method="POST" th:action="@{/admin/create-product}" th:object="${product}" enctype="multipart/form-data">
         <label for="title">Введите название: (обязательно)</label>
         <input type="text" th:field="*{title}" id="title">
         <div style="color:red" th:if="${#fields.hasErrors('title')}" th:errors="*{title}">title error</div>
@@ -26,6 +26,10 @@
         <label for="quantity">Введите количество: </label>
         <input type="text" th:field="*{quantity}" id="quantity">
         <div style="color:red" th:if="${#fields.hasErrors('quantity')}" th:errors="*{quantity}">quantity error</div>
+        <br>
+
+        <label for="images">Добавьте фото: </label>
+        <input type="file" name="images" id="images" multiple>
         <br>
 
         <input type="submit" value="Отправить">

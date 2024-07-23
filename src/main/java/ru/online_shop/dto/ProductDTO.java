@@ -1,10 +1,17 @@
 package ru.online_shop.dto;
 
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
+import ru.online_shop.models.Image;
+
+import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 public class ProductDTO {

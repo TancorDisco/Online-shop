@@ -1,6 +1,7 @@
 package ru.online_shop.controllers;
 
 import jakarta.validation.Valid;
+import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -32,7 +33,9 @@ public class ProductController {
 
     @GetMapping("/{id}")
     public String showProductInfo(@PathVariable("id") Long id, Model model) {
-        model.addAttribute("product", productService.findById(id));
+        Product product = productService.findById(id);
+        model.addAttribute("product", product);
+        model.addAttribute("images", product.getImages());
         return "/products/product-info";
     }
 
