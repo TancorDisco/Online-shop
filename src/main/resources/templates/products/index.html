@@ -9,6 +9,7 @@
 
 <div> Все товары: </div>
 <div th:each="product : ${products}">
+    <img th:src="@{/images/{id}(id=${product.previewImageId})}" height="60px" alt=""/><br><br>
     <a th:href="@{products/{id}(id=${product.getId()})}" th:text="${product.getTitle() + ', ' + product.getPrice()}"></a>
 </div>
 

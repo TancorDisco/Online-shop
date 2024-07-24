@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 import ru.online_shop.models.Image;
 import ru.online_shop.models.Product;
+import ru.online_shop.repositories.ImageRepository;
 import ru.online_shop.repositories.ProductRepository;
 
 import java.io.IOException;
@@ -20,11 +21,13 @@ import java.util.List;
 public class ProductService {
 
     private final ProductRepository productRepository;
+    private final ImageRepository imageRepository;
     private final ModelMapper modelMapper;
 
     @Autowired
-    public ProductService(ProductRepository productRepository, ModelMapper modelMapper) {
+    public ProductService(ProductRepository productRepository, ImageRepository imageRepository, ModelMapper modelMapper) {
         this.productRepository = productRepository;
+        this.imageRepository = imageRepository;
         this.modelMapper = modelMapper;
     }
 
@@ -56,11 +59,17 @@ public class ProductService {
         }
         if (!images.isEmpty()) {
             for (Image image : images) {
+                System.out.println(image.getOriginalFileName());
                 image.setProduct(product);
             }
-            images.getFirst().setPreviewImage(true);
+            Image previewImage = images.getLast();
+            previewImage.setPreviewImage(true);
+            imageRepository.save(previewImage);
+
             product.setImages(images);
-            product.setPreviewImageId(images.getFirst().getId());
+            imageRepository.saveAll(images);
+
+            product.setPreviewImageId(previewImage.getId());
         }
         productRepository.save(product);
     }
@@ -69,6 +78,9 @@ public class ProductService {
     public void update(Product product, Long id) {
         product.setId(id);
         product.setDateOfCreated(LocalDateTime.now());
+
+        Product oldVersProduct = productRepository.findById(id);
+        product.setPreviewImageId(oldVersProduct.getPreviewImageId());
         productRepository.save(product);
     }
 
