@@ -60,7 +60,6 @@ public class ProductService {
             }
             images.getFirst().setPreviewImage(true);
             product.setImages(images);
-            /*productRepository.save(product);*/
             product.setPreviewImageId(images.getFirst().getId());
         }
         productRepository.save(product);

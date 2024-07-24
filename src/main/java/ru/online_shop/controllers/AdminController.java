@@ -42,7 +42,6 @@ public class AdminController {
         return "admin/create-product";
     }
 
-    //TODO add few pictures
     @PostMapping("/create-product")
     public String createProduct(@ModelAttribute("product") @Valid ProductDTO productDTO,
                                 @RequestParam(name = "images", required = false) List<MultipartFile> images,

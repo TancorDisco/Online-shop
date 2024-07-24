@@ -4,7 +4,7 @@
 <div th:insert="~{blocks/header}"></div>
 
 <body>
-<div th:insert="~{blocks/navbar}"></div>
+    <div th:insert="~{blocks/navbar}"></div>
     <div>
         <p th:text="${person.getUsername()}">value</p>
         <p th:text="${person.getPassword()}">value</p>
@@ -17,5 +17,7 @@
     </div>
     <br>
     <a class="btn btn-warning" href="user/change" role="button">Изменить профиль</a>
+
+    <div th:insert="~{blocks/scripts}"></div>
 </body>
 </html>
