@@ -3,12 +3,10 @@ package ru.online_shop.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import ru.online_shop.models.Person;
-import ru.online_shop.security.PersonDetails;
 import ru.online_shop.services.PersonService;
 
 import java.util.Optional;
