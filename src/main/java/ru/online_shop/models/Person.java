@@ -6,6 +6,7 @@ import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
@@ -62,11 +63,30 @@ public class Person {
     @NotEmpty
     private String role;
 
+    @Column(name = "profile_picture_id")
+    private Long profilePictureId;
+
     /*@OneToMany(mappedBy = "user_entity")
     private List<Review> reviews;*/
 
     @Transient
     public String getFullName() {
         return name + " " + surname + " " + patronymic;
+    }
+
+    @Override
+    public String toString() {
+        return "Person{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", name='" + name + '\'' +
+                ", surname='" + surname + '\'' +
+                ", patronymic='" + patronymic + '\'' +
+                ", birthDay=" + birthDay +
+                ", email='" + email + '\'' +
+                ", address='" + address + '\'' +
+                ", role='" + role + '\'' +
+                ", profilePicture=" + profilePictureId +
+                '}';
     }
 }

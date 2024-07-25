@@ -6,12 +6,14 @@
 <body>
 <div th:insert="~{blocks/navbar}"></div>
 
-    <ul>
-        <li><a class="btn btn-success" href="/admin/create-product" role="button">Добавить товар</a></li>
-        <li><a class="btn btn-primary" href="admin/select-product" role="button">Список товаров</a></li>
-        <li><a class="btn btn-primary" href="#" role="button">Назначить админом</a></li>
-        <li><a class="btn btn-danger" href="#" role="button">Забанить</a></li>
-    </ul>
+<a class="btn btn-success" href="/admin/create-product" role="button">Добавить товар</a>
+<br>
+<a class="btn btn-primary" href="admin/select-product" role="button">Список товаров</a>
+<br>
+<a class="btn btn-primary" href="#" role="button">Назначить админом</a>
+<br>
+<a class="btn btn-danger" href="#" role="button">Забанить</a>
+<br>
 
 <div th:insert="~{blocks/scripts}"></div>
 </body>

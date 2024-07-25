@@ -1,0 +1,14 @@
+.navbar-brand img,
+.nav-item img {
+    vertical-align: middle;
+    display: inline-block;
+}
+
+.nav-item .dropdown-toggle {
+    display: flex;
+    align-items: center;
+}
+
+.user-profile-img {
+    margin-left: 10px;
+}

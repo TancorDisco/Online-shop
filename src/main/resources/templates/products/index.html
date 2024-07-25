@@ -13,10 +13,6 @@
     <a th:href="@{products/{id}(id=${product.getId()})}" th:text="${product.getTitle() + ', ' + product.getPrice()}"></a>
 </div>
 
-<div sec:authorize="isAuthenticated()">
-    Пользователь вошёл в аккаунт
-</div>
-
 <div th:insert="~{blocks/scripts}"></div>
 </body>
 </html>

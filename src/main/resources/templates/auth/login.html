@@ -4,14 +4,16 @@
 <div th:insert="~{blocks/header}"></div>
 
 <body>
-    <form name="f" method="post" action="/process_login">
-        <label for="username">Введите логин: </label>
-        <input type="text" name="username" id="username">
-        <br>
-        <label for="password">Введите пароль: </label>
-        <input type="text" name="password" id="password">
-        <br>
-        <input type="submit" value="Login">
+    <form name="f" method="post" action="/process_login" class="px-4 py-3">
+        <div class="mb-3">
+            <label for="username">Введите логин: </label>
+            <input type="text" name="username" id="username">
+        </div>
+        <div class="mb-3">
+            <label for="password">Введите пароль: </label>
+            <input type="text" name="password" id="password">
+        </div>
+        <button type="submit" class="btn btn-primary">Sign in</button>
 
         <div th:if="${param.error}" style="color: red">
             Неправильное имя или пароль!

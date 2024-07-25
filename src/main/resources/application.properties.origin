@@ -1,0 +1,27 @@
+spring.application.name=Online-shop
+
+# config Data source
+spring.datasource.driver-class-name=
+spring.datasource.url=
+spring.datasource.username=
+spring.datasource.password=
+
+# config hibernate
+spring.jpa.properties.hibernate.dialect=
+spring.jpa.properties.hibernate.show_sql=
+# hibernate.current_session_context_class=
+
+#For work HTTP methods: PUT, PATCH, DELETE
+spring.mvc.hiddenmethod.filter.enabled=
+
+# config log
+logging.level.root=
+logging.level.ru.online-shop=
+logging.file.name=
+logging.file.max-size=
+logging.file.max-history=
+
+#Tune the file upload limits
+spring.servlet.multipart.enabled=
+spring.servlet.multipart.max-file-size=
+spring.servlet.multipart.max-request-size=

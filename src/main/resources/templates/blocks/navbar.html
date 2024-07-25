@@ -35,16 +35,25 @@
                 </form>
                 <div sec:authorize="!isAuthenticated()">
                     <a class="navbar-brand" href="/auth/login">
-                        <img th:src=@{/images/{id}(id=7)} alt="Bootstrap" width="30" height="30">
+                        <img th:src=@{/images/{id}(id=7)} alt="Bootstrap" width="40" height="40"
+                             class="user-profile-img">
                     </a>
                 </div>
                 <div sec:authorize="isAuthenticated()">
                     <div class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                            aria-expanded="false">
-                            <img th:src=@{/images/{id}(id=7)} alt="Bootstrap" width="30" height="30">
+                            <div th:if="${profilePictureId} == null">
+                                <img th:src=@{/images/{id}(id=7)} alt="Bootstrap" width="40" height="40"
+                                     class="user-profile-img">
+                            </div>
+                            <div th:if="${profilePictureId} != null">
+                                <img th:src=@{/images/{id}(id=${profilePictureId})} alt="Bootstrap" width="40" height="40"
+                                     class="user-profile-img">
+                            </div>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-lg-end">
+                            <li>Authenticated as <span sec:authentication="name"></span></li>
                             <li><a class="dropdown-item" href="/user">Аккаунт</a></li>
                             <div sec:authorize="hasRole('ROLE_ADMIN')">
                                 <li><a class="dropdown-item" href="/admin">Управление</a></li>

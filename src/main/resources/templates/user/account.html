@@ -7,7 +7,6 @@
     <div th:insert="~{blocks/navbar}"></div>
     <div>
         <p th:text="${person.getUsername()}">value</p>
-        <p th:text="${person.getPassword()}">value</p>
         <p th:text="${person.getName()}">value</p>
         <p th:text="${person.getSurname()}">value</p>
         <p th:text="${person.getPatronymic()}">value</p>
@@ -17,6 +16,19 @@
     </div>
     <br>
     <a class="btn btn-warning" href="user/change" role="button">Изменить профиль</a>
+    <form th:method="POST" th:action="@{/user/add-profile-picture}" enctype="multipart/form-data">
+        <br>
+        <div class="form-group">
+            <input type="file" name="profileImage" accept="image/*" class="form-control-file">
+        </div>
+        <br>
+        <div th:if="${profilePictureId} == null">
+            <button type="submit" class="btn btn-primary">Добавить аватарку</button>
+        </div>
+        <div th:if="${profilePictureId} != null">
+            <button type="submit" class="btn btn-primary">Изменить аватарку</button>
+        </div>
+    </form>
 
     <div th:insert="~{blocks/scripts}"></div>
 </body>
