@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+
+<div th:insert="~{blocks/header}"></div>
+
+<body>
+<div th:insert="~{blocks/navbar}"></div>
+
+<div th:each="product : ${productsOfUser}" class="col">
+    <div class="card mb-4 rounded-3 shadow-sm">
+        <div class="card-body">
+            <img th:src="@{/images/{id}(id=${product.previewImageId})}" class="img-fluid" alt=""/><br><br>
+            <a th:href="@{products/{id}(id=${product.getId()})}"
+               th:text="${product.getTitle() + ', ' + product.getPrice()}"></a>
+        </div>
+    </div>
+</div>
+<div th:if="${productsOfUser.isEmpty()}">
+    <span>Вы пока ничего не добавили в корзину :(</span>
+</div>
+
+<div th:insert="~{blocks/scripts}"></div>
+</body>
+</html>

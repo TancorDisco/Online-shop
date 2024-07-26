@@ -53,6 +53,9 @@ public class Product {
     @Column(name = "date_of_created")
     private LocalDateTime dateOfCreated;
 
+    @ManyToMany(mappedBy = "products")
+    private List<Person> people;
+
     @PrePersist
     private void init() {
         dateOfCreated = LocalDateTime.now();

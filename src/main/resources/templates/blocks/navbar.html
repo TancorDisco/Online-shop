@@ -33,7 +33,25 @@
                     <input class="form-control me-2" type="text" id="searchRequest" name="searchRequest">
                     <button class="btn btn-outline-success" type="submit">Поиск</button>
                 </form>
+
+                <div sec:authorize="isAuthenticated()">
+                    <a href="/cart" class="btn btn-primary position-relative cart" role="button" data-bs-toggle="link">
+                        Корзина
+                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                            0
+                            <span class="visually-hidden">quantity</span>
+                        </span>
+                    </a>
+                </div>
+
                 <div sec:authorize="!isAuthenticated()">
+                    <a href="/auth/login" class="btn btn-primary position-relative cart" role="button" data-bs-toggle="link">
+                        Корзина
+                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                            0
+                            <span class="visually-hidden">quantity</span>
+                        </span>
+                    </a>
                     <a class="navbar-brand" href="/auth/login">
                         <img th:src=@{/images/{id}(id=7)} alt="Bootstrap" width="40" height="40"
                              class="user-profile-img">

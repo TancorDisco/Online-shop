@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 import ru.online_shop.models.Image;
+import ru.online_shop.models.Person;
 import ru.online_shop.models.Product;
 import ru.online_shop.repositories.ImageRepository;
 import ru.online_shop.repositories.ProductRepository;
@@ -15,6 +16,7 @@ import ru.online_shop.repositories.ProductRepository;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -87,6 +89,10 @@ public class ProductService {
     @Transactional
     public void delete(Long id) {
         productRepository.deleteById(id);
+    }
+
+    public List<Product> findByPerson(Person person) {
+        return productRepository.findAllByPeople(person);
     }
 
     @SneakyThrows

@@ -10,6 +10,7 @@ import lombok.ToString;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "person")
@@ -65,6 +66,14 @@ public class Person {
 
     @Column(name = "profile_picture_id")
     private Long profilePictureId;
+
+    @ManyToMany
+    @JoinTable(
+            name = "person_product",
+            joinColumns = @JoinColumn(name = "person_id"),
+            inverseJoinColumns = @JoinColumn(name = "product_id")
+    )
+    private List<Product> products;
 
     /*@OneToMany(mappedBy = "user_entity")
     private List<Review> reviews;*/

@@ -15,6 +15,14 @@
 
     <p th:text="${product.getTitle()}">Value</p>
     <p th:text="${product.getPrice()}">Value</p>
+    <div sec:authorize="isAuthenticated()">
+        <a class="btn btn-success" th:href="@{/products/{id}/add-product-to-cart(id=${product.getId()})}"
+           role="button">Добавить в корзину</a>
+    </div>
+    <div sec:authorize="!isAuthenticated()">
+        <a class="btn btn-success" href="/auth/login"
+           role="button">Добавить в корзину</a>
+    </div>
     <div sec:authorize="hasRole('ROLE_ADMIN')">
         <ul>
             <li><a class="btn btn-warning" th:href="@{/products/{id}/update(id=${product.getId()})}"

@@ -4,24 +4,32 @@ import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import ru.online_shop.dto.ProductDTO;
+import ru.online_shop.models.Person;
 import ru.online_shop.models.Product;
+import ru.online_shop.services.PersonService;
 import ru.online_shop.services.ProductService;
+
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/products")
 public class ProductController {
 
     private final ProductService productService;
+    private final PersonService personService;
     private final ModelMapper modelMapper;
 
     @Autowired
-    public ProductController(ProductService productService, ModelMapper modelMapper) {
+    public ProductController(ProductService productService, PersonService personService, ModelMapper modelMapper) {
         this.productService = productService;
+        this.personService = personService;
         this.modelMapper = modelMapper;
     }
 
@@ -64,8 +72,20 @@ public class ProductController {
         return "redirect:/products";
     }
 
+    @GetMapping("/{id}/add-product-to-cart")
+    public String addProductToCart(@PathVariable Long id) {
+        personService.addProductToCart(getAuthUser(), productService.findById(id));
+        return "redirect:/products/{id}";
+    }
+
 
     public Product convertToProduct(ProductDTO productDTO) {
         return modelMapper.map(productDTO, Product.class);
+    }
+
+    public Person getAuthUser() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        Optional<Person> person = personService.findByUsername(auth.getName());
+        return person.orElse(null);
     }
 }

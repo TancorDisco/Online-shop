@@ -1,7 +1,6 @@
 package ru.online_shop.services;
 
 import lombok.SneakyThrows;
-import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 import ru.online_shop.models.Image;
 import ru.online_shop.models.Person;
+import ru.online_shop.models.Product;
 import ru.online_shop.repositories.ImageRepository;
 import ru.online_shop.repositories.PersonRepository;
 
@@ -63,5 +63,11 @@ public class PersonService {
     @SneakyThrows
     private Image convertToImage(MultipartFile file) {
         return modelMapper.map(file, Image.class);
+    }
+
+    public void addProductToCart(Person authUser, Product product) {
+        authUser.getProducts().add(product);
+        product.getPeople().add(authUser);
+        personRepository.save(authUser);
     }
 }

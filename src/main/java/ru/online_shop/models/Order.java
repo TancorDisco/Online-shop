@@ -1,3 +1,4 @@
+/*
 package ru.online_shop.models;
 
 import jakarta.persistence.*;
@@ -20,9 +21,11 @@ public class Order {
     private Long id;
 
     //TODO в одном заказе несколько товаров
-    @OneToOne
+    */
+/*@OneToOne
     @JoinColumn(name = "product", referencedColumnName = "id")
-    private Product product;
+    private Product product;*//*
+
 
     @Column(name = "status")
     @NotEmpty
@@ -36,3 +39,4 @@ public class Order {
     @NotEmpty
     private String deliveryInfo;
 }
+*/

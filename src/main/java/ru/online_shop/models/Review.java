@@ -34,4 +34,5 @@ public class Review {
     /*@ManyToOne
     @JoinColumn(name = "user_entity", referencedColumnName = "id")
     private UserEntity userEntity;*/
+
 }
