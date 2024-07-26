@@ -39,8 +39,6 @@ public class PersonController {
     public String accountPage(Model model) {
         Person authUser = getAuthUser();
         model.addAttribute("person", authUser);
-        model.addAttribute("profilePicture", imageService.findById(authUser.getProfilePictureId())
-                .orElse(null));
         return "user/account";
     }
 
@@ -63,7 +61,7 @@ public class PersonController {
     }
 
     @PostMapping("/add-profile-picture")
-    public String addProfilePicture(@RequestParam("profileImage") MultipartFile image) {
+    public String addProfilePicture(@RequestParam("profilePicture") MultipartFile image) {
         if (image.isEmpty()) {
             return "user";
         }

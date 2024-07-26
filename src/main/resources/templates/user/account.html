@@ -19,7 +19,7 @@
     <form th:method="POST" th:action="@{/user/add-profile-picture}" enctype="multipart/form-data">
         <br>
         <div class="form-group">
-            <input type="file" name="profileImage" accept="image/*" class="form-control-file">
+            <input type="file" name="profilePicture" accept="image/*" class="form-control-file">
         </div>
         <br>
         <div th:if="${profilePictureId} == null">

@@ -7,10 +7,20 @@
 
 <div th:insert="~{blocks/navbar}"></div>
 
-<div> Все товары: </div>
-<div th:each="product : ${products}">
-    <img th:src="@{/images/{id}(id=${product.previewImageId})}" height="60px" alt=""/><br><br>
-    <a th:href="@{products/{id}(id=${product.getId()})}" th:text="${product.getTitle() + ', ' + product.getPrice()}"></a>
+<h2 class="fw-normal text-body-emphasis">Все товары: </h2>
+<div class="row row-cols-1 row-cols-md-3 mb-3 text-center">
+    <div th:each="product : ${products}" class="col">
+        <div class="card mb-4 rounded-3 shadow-sm">
+            <div class="card-body">
+                <img th:src="@{/images/{id}(id=${product.previewImageId})}" class="img-fluid" alt=""/><br><br>
+                <a th:href="@{products/{id}(id=${product.getId()})}"
+                   th:text="${product.getTitle() + ', ' + product.getPrice()}"></a>
+            </div>
+        </div>
+    </div>
+    <div th:if="${products.isEmpty()}">
+        <span>По вашему запросу ничего не найдено</span>
+    </div>
 </div>
 
 <div th:insert="~{blocks/scripts}"></div>

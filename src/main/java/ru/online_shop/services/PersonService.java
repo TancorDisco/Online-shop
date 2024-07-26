@@ -38,6 +38,7 @@ public class PersonService {
     public void update(Person personToBeUpdated, Person person) {
         person.setId(personToBeUpdated.getId());
         person.setRole(personToBeUpdated.getRole());
+        person.setProfilePictureId(personToBeUpdated.getProfilePictureId());
         personRepository.save(person);
     }
 

@@ -15,6 +15,9 @@ import java.util.List;
 
 @Data
 public class ProductDTO {
+
+    private Long id;
+
     @NotEmpty(message = "Незаполненное поле!")
     @Size(min = 2, max = 30, message = "Название должно быть от 2 до 30 символов")
     private String title;
