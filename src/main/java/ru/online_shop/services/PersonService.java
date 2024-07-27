@@ -70,4 +70,10 @@ public class PersonService {
         product.getPeople().add(authUser);
         personRepository.save(authUser);
     }
+
+    public void removeFromTheCart(Person authUser, Product product) {
+        authUser.getProducts().remove(product);
+        product.getPeople().remove(authUser);
+        personRepository.save(authUser);
+    }
 }

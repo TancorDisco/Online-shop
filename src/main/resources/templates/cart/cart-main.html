@@ -13,10 +13,19 @@
             <a th:href="@{products/{id}(id=${product.getId()})}"
                th:text="${product.getTitle() + ', ' + product.getPrice()}"></a>
         </div>
+        <form th:method="DELETE" th:action="@{/cart/remove-from-the-cart/{id}(id=${product.id})}">
+            <button type="submit" class="btn btn-danger" role="button">Убрать товар из корзины</button>
+        </form>
     </div>
 </div>
 <div th:if="${productsOfUser.isEmpty()}">
     <span>Вы пока ничего не добавили в корзину :(</span>
+</div>
+<div th:if="${!productsOfUser.isEmpty()}">
+    <span>Товары в корзине на сумму: </span>
+    <span th:text="${totalPrice}"></span>
+    <br>
+    <a class="btn btn-success" href="#" role="button">Оформить</a>
 </div>
 
 <div th:insert="~{blocks/scripts}"></div>

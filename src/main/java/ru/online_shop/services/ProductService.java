@@ -99,4 +99,14 @@ public class ProductService {
     private Image convertToImage(MultipartFile file) {
         return modelMapper.map(file, Image.class);
     }
+
+    public Double getTotalPrice(Person authUser) {
+        List<Product> productsInTheCart = productRepository.findAllByPeople(authUser);
+        Double totalPrice = (double) 0;
+        for (Product product : productsInTheCart) {
+            totalPrice += product.getPrice();
+            System.out.println(totalPrice);
+        }
+        return totalPrice;
+    }
 }

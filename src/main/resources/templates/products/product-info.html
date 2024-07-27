@@ -20,8 +20,7 @@
            role="button">Добавить в корзину</a>
     </div>
     <div sec:authorize="!isAuthenticated()">
-        <a class="btn btn-success" href="/auth/login"
-           role="button">Добавить в корзину</a>
+        <a class="btn btn-success" href="/auth/login" role="button">Добавить в корзину</a>
     </div>
     <div sec:authorize="hasRole('ROLE_ADMIN')">
         <ul>
