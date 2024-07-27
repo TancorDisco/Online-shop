@@ -76,4 +76,8 @@ public class PersonService {
         product.getPeople().remove(authUser);
         personRepository.save(authUser);
     }
+
+    public Person findById(Long id) {
+        return personRepository.findById(id).orElse(null);
+    }
 }

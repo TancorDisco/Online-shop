@@ -25,7 +25,9 @@
     <span>Товары в корзине на сумму: </span>
     <span th:text="${totalPrice}"></span>
     <br>
-    <a class="btn btn-success" href="#" role="button">Оформить</a>
+    <form th:method="POST" th:action="@{/payment/{id}(id=${personId})}">
+        <button type="submit" class="btn btn-success" role="button">Оформить</button>
+    </form>
 </div>
 
 <div th:insert="~{blocks/scripts}"></div>

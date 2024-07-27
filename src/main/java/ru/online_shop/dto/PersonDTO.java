@@ -39,4 +39,10 @@ public class PersonDTO {
     /*@Pattern(regexp = "[A-Z]\\w+, [A-Z]\\w+, \\d{6}", message = "Ваш адрес должен быть в формате: " +
             "страна, город, индекс(6 цифр) Пример: Россия, Москва, 123456")*/
     private String address;
+
+    private Long accountNumber;
+
+    private Long inn;
+
+    private Long bik;
 }

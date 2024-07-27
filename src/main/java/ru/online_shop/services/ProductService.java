@@ -105,7 +105,6 @@ public class ProductService {
         Double totalPrice = (double) 0;
         for (Product product : productsInTheCart) {
             totalPrice += product.getPrice();
-            System.out.println(totalPrice);
         }
         return totalPrice;
     }
