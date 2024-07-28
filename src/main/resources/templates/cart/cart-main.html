@@ -29,6 +29,19 @@
         <button type="submit" class="btn btn-success" role="button">Оформить</button>
     </form>
 </div>
+<br>
+<div th:if="${!ordersOfUser.isEmpty()}">
+    <br>
+    <span>Ваши заказы: </span>
+    <div th:each="order : ${ordersOfUser}">
+        <div class="card mb-4 rounded-3 shadow-sm">
+            <div class="card-body">
+                <p th:text="${order.id}"></p>
+                <p th:text="${order.status}"></p>
+            </div>
+        </div>
+    </div>
+</div>
 
 <div th:insert="~{blocks/scripts}"></div>
 </body>

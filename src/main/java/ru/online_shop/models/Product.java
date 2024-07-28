@@ -53,8 +53,11 @@ public class Product {
     @Column(name = "date_of_created")
     private LocalDateTime dateOfCreated;
 
-    @ManyToMany(mappedBy = "products")
+    @ManyToMany(mappedBy = "productsInTheCart")
     private List<Person> people;
+
+    @ManyToMany(mappedBy = "productsInTheOrder")
+    private List<Order> orders;
 
     @PrePersist
     private void init() {

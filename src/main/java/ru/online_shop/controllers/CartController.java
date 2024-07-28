@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import ru.online_shop.models.Person;
+import ru.online_shop.services.OrderService;
 import ru.online_shop.services.PersonService;
 import ru.online_shop.services.ProductService;
 
@@ -21,11 +22,13 @@ public class CartController {
 
     private final ProductService productService;
     private final PersonService personService;
+    private final OrderService orderService;
 
     @Autowired
-    public CartController(ProductService productService, PersonService personService) {
+    public CartController(ProductService productService, PersonService personService, OrderService orderService) {
         this.productService = productService;
         this.personService = personService;
+        this.orderService = orderService;
     }
 
     @GetMapping
@@ -34,6 +37,7 @@ public class CartController {
         model.addAttribute("productsOfUser", productService.findByPerson(authUser));
         model.addAttribute("totalPrice", productService.getTotalPrice(authUser));
         model.addAttribute("personId", authUser.getId());
+        model.addAttribute("ordersOfUser", orderService.findAllByPerson(authUser));
         return "cart/cart-main";
     }
 

@@ -72,7 +72,7 @@ public class Person {
             joinColumns = @JoinColumn(name = "person_id"),
             inverseJoinColumns = @JoinColumn(name = "product_id")
     )
-    private List<Product> products;
+    private List<Product> productsInTheCart;
 
     @Column(name = "account_number")
     private String accountNumber;
@@ -80,6 +80,10 @@ public class Person {
     private Long inn;
 
     private Long bik;
+
+    @OneToMany(mappedBy = "person", cascade = CascadeType.ALL)
+    private List<Order> orders;
+
     /*@OneToMany(mappedBy = "user_entity")
     private List<Review> reviews;*/
 

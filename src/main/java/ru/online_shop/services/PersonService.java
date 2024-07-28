@@ -13,6 +13,7 @@ import ru.online_shop.models.Product;
 import ru.online_shop.repositories.ImageRepository;
 import ru.online_shop.repositories.PersonRepository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Slf4j
@@ -66,14 +67,20 @@ public class PersonService {
     }
 
     public void addProductToCart(Person authUser, Product product) {
-        authUser.getProducts().add(product);
+        authUser.getProductsInTheCart().add(product);
         product.getPeople().add(authUser);
         personRepository.save(authUser);
     }
 
     public void removeFromTheCart(Person authUser, Product product) {
-        authUser.getProducts().remove(product);
+        authUser.getProductsInTheCart().remove(product);
         product.getPeople().remove(authUser);
+        personRepository.save(authUser);
+    }
+
+    public void removeAllFromTheCart(Person authUser) {
+        /*authUser.getProductsInTheCart().forEach(o -> o.getPeople().remove(authUser));*/
+        authUser.getProductsInTheCart().clear();
         personRepository.save(authUser);
     }
 
