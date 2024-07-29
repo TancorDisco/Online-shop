@@ -1,5 +1,6 @@
 package ru.online_shop.services;
 
+import jakarta.validation.constraints.Pattern;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
@@ -13,7 +14,6 @@ import ru.online_shop.models.Product;
 import ru.online_shop.repositories.ImageRepository;
 import ru.online_shop.repositories.PersonRepository;
 
-import java.util.List;
 import java.util.Optional;
 
 @Slf4j
@@ -79,12 +79,16 @@ public class PersonService {
     }
 
     public void removeAllFromTheCart(Person authUser) {
-        /*authUser.getProductsInTheCart().forEach(o -> o.getPeople().remove(authUser));*/
         authUser.getProductsInTheCart().clear();
         personRepository.save(authUser);
     }
 
     public Person findById(Long id) {
         return personRepository.findById(id).orElse(null);
+    }
+
+    public void addAccountNumber(Person authUser, String accountNumber) {
+        authUser.setAccountNumber(accountNumber);
+        personRepository.save(authUser);
     }
 }

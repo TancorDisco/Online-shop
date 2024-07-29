@@ -1,6 +1,7 @@
 package ru.online_shop.controllers;
 
 import jakarta.validation.Valid;
+import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -12,6 +13,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import ru.online_shop.dto.PersonDTO;
+import ru.online_shop.models.AccountNumberForm;
 import ru.online_shop.models.Image;
 import ru.online_shop.models.Person;
 import ru.online_shop.repositories.ImageRepository;
@@ -20,6 +22,7 @@ import ru.online_shop.services.PersonService;
 
 import java.util.Optional;
 
+@Slf4j
 @Controller
 @RequestMapping("/user")
 public class PersonController {
@@ -39,6 +42,7 @@ public class PersonController {
     public String accountPage(Model model) {
         Person authUser = getAuthUser();
         model.addAttribute("person", authUser);
+        model.addAttribute("form", new AccountNumberForm());
         return "user/account";
     }
 
@@ -63,9 +67,20 @@ public class PersonController {
     @PostMapping("/add-profile-picture")
     public String addProfilePicture(@RequestParam("profilePicture") MultipartFile image) {
         if (image.isEmpty()) {
-            return "user";
+            return "user/account";
         }
         personService.addProfilePicture(getAuthUser(), image);
+        return "redirect:/user";
+    }
+
+    @PostMapping("/add-account-number")
+    public String addAccountNumber(@ModelAttribute("form") @Valid AccountNumberForm form,
+                                   BindingResult bindingResult, Model model) {
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("person", getAuthUser());
+            return "user/account";
+        }
+        personService.addAccountNumber(getAuthUser(), form.getAccountNumber());
         return "redirect:/user";
     }
 

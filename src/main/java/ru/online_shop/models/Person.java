@@ -3,6 +3,7 @@ package ru.online_shop.models;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -75,6 +76,7 @@ public class Person {
     private List<Product> productsInTheCart;
 
     @Column(name = "account_number")
+    @Pattern(regexp = "^(\\d{20}|\\d{22})$", message = "Счёт должен быть 20 или 22 цифры")
     private String accountNumber;
 
     private Long inn;

@@ -25,9 +25,15 @@
     <span>Товары в корзине на сумму: </span>
     <span th:text="${totalPrice}"></span>
     <br>
-    <form th:method="POST" th:action="@{/payment/{id}(id=${personId})}">
-        <button type="submit" class="btn btn-success" role="button">Оформить</button>
-    </form>
+    <div th:if="${person.accountNumber == null}">
+        <span>У вас не добавлен номер расчётного счёта для списания. Поэтому вы не сможете оформить заказ.</span>
+        <a href="/user">Пожалуйста, добавьте номер расчётного счёта.</a>
+    </div>
+    <div th:if="${person.accountNumber != null}">
+        <form th:method="POST" th:action="@{/payment/{id}(id=${person.id})}">
+            <button type="submit" class="btn btn-success" role="button">Оформить</button>
+        </form>
+    </div>
 </div>
 <br>
 <div th:if="${!ordersOfUser.isEmpty()}">

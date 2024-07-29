@@ -23,6 +23,7 @@ public class RegistrationService {
     public void register(Person person) {
         person.setPassword(passwordEncoder.encode(person.getPassword()));
         person.setRole("ROLE_USER");
+        person.setProfilePictureId(7L);
         personRepository.save(person);
     }
 }

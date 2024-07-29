@@ -36,7 +36,7 @@ public class CartController {
         Person authUser = getAuthUser();
         model.addAttribute("productsOfUser", productService.findByPerson(authUser));
         model.addAttribute("totalPrice", productService.getTotalPrice(authUser));
-        model.addAttribute("personId", authUser.getId());
+        model.addAttribute("person", authUser);
         model.addAttribute("ordersOfUser", orderService.findAllByPerson(authUser));
         return "cart/cart-main";
     }

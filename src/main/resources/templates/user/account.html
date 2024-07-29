@@ -5,6 +5,13 @@
 
 <body>
     <div th:insert="~{blocks/navbar}"></div>
+    <div th:if="${person.profilePictureId} == null">
+        <img th:src=@{/images/{id}(id=7)} width="100" class="user-profile-img">
+    </div>
+    <div th:if="${person.profilePictureId} != null">
+        <img th:src=@{/images/{id}(id=${profilePictureId})} width="100" class="user-profile-img">
+    </div>
+    <br>
     <div>
         <p th:text="${person.getUsername()}">value</p>
         <p th:text="${person.getName()}">value</p>
@@ -16,19 +23,40 @@
     </div>
     <br>
     <a class="btn btn-warning" href="user/change" role="button">Изменить профиль</a>
-    <form th:method="POST" th:action="@{/user/add-profile-picture}" enctype="multipart/form-data">
-        <br>
-        <div class="form-group">
-            <input type="file" name="profilePicture" accept="image/*" class="form-control-file">
+    <br>
+    <div class="card mb-4 rounded-3 shadow-sm">
+        <div class="card-body">
+            <form th:method="POST" th:action="@{/user/add-profile-picture}" enctype="multipart/form-data">
+                <div class="form-group">
+                    <input type="file" name="profilePicture" accept="image/*" class="form-control-file">
+                </div>
+                <br>
+                <div th:if="${profilePictureId} == null">
+                    <button type="submit" class="btn btn-primary">Добавить аватарку</button>
+                </div>
+                <div th:if="${profilePictureId} != null">
+                    <button type="submit" class="btn btn-primary">Изменить аватарку</button>
+                </div>
+            </form>
         </div>
-        <br>
-        <div th:if="${profilePictureId} == null">
-            <button type="submit" class="btn btn-primary">Добавить аватарку</button>
+    </div>
+    <div class="card mb-4 rounded-3 shadow-sm">
+        <div class="card-body">
+            <form th:method="POST" th:action="@{/user/add-account-number}" th:object="${form}">
+                <label for="accountNumber">Номер расчётного счёта для списания: </label>
+                <input type="text" name="accountNumber" id="accountNumber" th:value="${form.accountNumber}">
+                <div style="color:red" th:if="${#fields.hasErrors('accountNumber')}"
+                     th:errors="*{accountNumber}">accountNumber error</div>
+                <br>
+                <div th:if="${person.accountNumber} == null">
+                    <button type="submit" class="btn btn-primary">Добавить</button>
+                </div>
+                <div th:if="${person.accountNumber} != null">
+                    <button type="submit" class="btn btn-primary">Изменить</button>
+                </div>
+            </form>
         </div>
-        <div th:if="${profilePictureId} != null">
-            <button type="submit" class="btn btn-primary">Изменить аватарку</button>
-        </div>
-    </form>
+    </div>
 
     <div th:insert="~{blocks/scripts}"></div>
 </body>
