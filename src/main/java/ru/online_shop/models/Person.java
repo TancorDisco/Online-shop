@@ -83,7 +83,7 @@ public class Person {
 
     private Long bik;
 
-    @OneToMany(mappedBy = "person", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "person")
     private List<Order> orders;
 
     @OneToMany(mappedBy = "person", cascade = CascadeType.ALL)

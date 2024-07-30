@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -42,6 +43,12 @@ public class ReviewController {
         Review review = convertToReview(reviewDTO);
         reviewService.addReview(review, productService.findById(id));
         return "redirect:/products/" + id;
+    }
+
+    @DeleteMapping("/products/{id}/delete-review/{reviewId}")
+    public String deleteReview(@PathVariable("id") Long productId, @PathVariable("reviewId") Long reviewId) {
+        reviewService.deleteReview(reviewId);
+        return "redirect:/products/" + productId;
     }
 
     public Review convertToReview(ReviewDTO reviewDTO) {

@@ -61,8 +61,14 @@
             <br>
             <p th:text="${review.grade}"></p>
             <p th:text="${review.text}"></p>
-            <hr>
             <br>
+            <div sec:authorize="hasRole('ROLE_ADMIN')">
+                <form th:method="DELETE" th:action="@{'/products/' + *{product.id} + '/delete-review/' + *{review.id}}">
+                    <button type="submit" class="btn btn-danger" role="button">Удалить отзыв</button>
+                </form>
+            </div>
+            <br>
+            <hr>
         </div>
     </div>
 </div>

@@ -34,6 +34,10 @@ public class ReviewService {
         reviewRepository.save(review);
     }
 
+    public void deleteReview(Long reviewId) {
+        reviewRepository.deleteById(reviewId);
+    }
+
     public Person getAuthUser() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         Optional<Person> person = personService.findByUsername(auth.getName());
