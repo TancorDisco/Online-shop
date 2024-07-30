@@ -86,8 +86,8 @@ public class Person {
     @OneToMany(mappedBy = "person", cascade = CascadeType.ALL)
     private List<Order> orders;
 
-    /*@OneToMany(mappedBy = "user_entity")
-    private List<Review> reviews;*/
+    @OneToMany(mappedBy = "person", cascade = CascadeType.ALL)
+    private List<Review> reviews;
 
     @Transient
     public String getFullName() {

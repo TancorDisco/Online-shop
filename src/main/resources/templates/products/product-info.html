@@ -34,6 +34,39 @@
         </ul>
     </div>
 </div>
+<hr>
+<div>
+    <form th:method="POST" th:action="@{/products/{id}/add-review(id=${product.id})}" th:object="${review}">
+        <label for="grade">Ваша оценка: </label>
+        <input type="text" th:field="*{grade}" id="grade">
+        <div style="color:red" th:if="${#fields.hasErrors('grade')}" th:errors="*{grade}">grade error</div>
+        <br>
+        <label for="comment">Текст: </label>
+        <input type="text" th:field="*{text}" id="comment">
+        <div style="color:red" th:if="${#fields.hasErrors('text')}" th:errors="*{text}">text error</div>
+        <br>
+        <button type="submit" class="btn btn-success" role="button">Добавить отзыв</button>
+    </form>
+</div>
+<hr>
+<h4 class="fw-normal text-body-emphasis">Отзывы: </h4>
+<div th:if="${product.reviews.isEmpty()}">
+    <span>Пока нет отзывов</span>
+</div>
+<div th:each="review : ${product.reviews}" class="col">
+    <div class="card mb-4 rounded-3 shadow-sm">
+        <div class="card-body">
+            <hr>
+            <p th:text="${review.person.name}"></p>
+            <br>
+            <p th:text="${review.grade}"></p>
+            <p th:text="${review.text}"></p>
+            <hr>
+            <br>
+        </div>
+    </div>
+</div>
+
 
 <div th:insert="~{blocks/scripts}"></div>
 </body>

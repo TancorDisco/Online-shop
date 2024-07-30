@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import ru.online_shop.dto.ProductDTO;
+import ru.online_shop.dto.ReviewDTO;
 import ru.online_shop.models.Person;
 import ru.online_shop.models.Product;
 import ru.online_shop.services.PersonService;
@@ -44,6 +45,7 @@ public class ProductController {
         Product product = productService.findById(id);
         model.addAttribute("product", product);
         model.addAttribute("images", product.getImages());
+        model.addAttribute("review", new ReviewDTO());
         return "/products/product-info";
     }
 

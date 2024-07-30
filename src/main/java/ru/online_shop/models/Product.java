@@ -59,6 +59,9 @@ public class Product {
     @ManyToMany(mappedBy = "productsInTheOrder")
     private List<Order> orders;
 
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+    private List<Review> reviews;
+
     @PrePersist
     private void init() {
         dateOfCreated = LocalDateTime.now();

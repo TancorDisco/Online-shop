@@ -31,8 +31,11 @@ public class Review {
     @Max(10)
     private Integer grade;
 
-    /*@ManyToOne
-    @JoinColumn(name = "user_entity", referencedColumnName = "id")
-    private UserEntity userEntity;*/
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "product_id")
+    private Product product;
 
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "person_id")
+    private Person person;
 }
