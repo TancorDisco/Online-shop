@@ -36,10 +36,10 @@ public class PersonService {
     }
 
     @Transactional
-    public void update(Person personToBeUpdated, Person person) {
-        person.setId(personToBeUpdated.getId());
-        person.setRole(personToBeUpdated.getRole());
-        person.setProfilePictureId(personToBeUpdated.getProfilePictureId());
+    public void update(Person oldPerson, Person person) {
+        person.setId(oldPerson.getId());
+        person.setRole(oldPerson.getRole());
+        person.setProfilePictureId(oldPerson.getProfilePictureId());
         personRepository.save(person);
     }
 
